@@ -46,12 +46,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  final myController = TextEditingController();
+  final serverAddressController = TextEditingController();
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    myController.dispose();
+    serverAddressController.dispose();
     super.dispose();
   }
 
@@ -83,9 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
+          Text('Pelco D support only for now'),
           Text('TCP server address'),
           TextField(
-            controller: myController..text = 'server:port',
+            controller: serverAddressController..text = '192.168.1.21:8899',
           ),
           Center(
             // Center is a layout widget. It takes a single child and positions it
@@ -111,8 +112,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       RaisedButton(
-                        onPressed: () {},
-                        child: Icon(Icons.arrow_right),
+                        onPressed: () {onClickLeft(serverAddressController.text);},
+                        child: Icon(Icons.arrow_left),
                       )
                     ],
 //            children: <Widget>[
@@ -132,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: <Widget>[
                           RaisedButton(
                             onPressed: () {
-                              onClickUp(myController.text);
+                              onClickUp(serverAddressController.text);
                             },
                             child: Icon(Icons.arrow_drop_up),
                           )
@@ -142,8 +143,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       Row(
                         children: <Widget>[
                           RaisedButton(
-                            onPressed: () {},
-                            child: Icon(Icons.arrow_drop_up),
+                            onPressed: () {
+                              onClickDown(serverAddressController.text);
+                              },
+                            child: Icon(Icons.arrow_drop_down),
                           )
                         ],
                       ),
@@ -153,7 +156,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          onClickRight(serverAddressController.text);
+                        },
                         child: Icon(Icons.arrow_right),
                       )
                     ],
